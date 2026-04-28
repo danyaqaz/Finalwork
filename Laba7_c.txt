@@ -1,0 +1,72 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <conio.h>
+
+int a, b, c, d, e, y;
+
+char fin[] = "%d";
+char fout[] = "y = %d\n";
+char msg[] = "Vvedite a,b,c,d,e:\n";
+
+int main() {
+    __asm {
+        push ebx
+        push edx
+        push ecx
+
+        push offset msg
+        call printf
+        add esp, 4
+
+        push offset a
+        push offset fin
+        call scanf
+        add esp, 8
+
+        push offset b
+        push offset fin
+        call scanf
+        add esp, 8
+
+        push offset c
+        push offset fin
+        call scanf
+        add esp, 8
+
+        push offset d
+        push offset fin
+        call scanf
+        add esp, 8
+
+        push offset e
+        push offset fin
+        call scanf
+        add esp, 8
+
+        ; Вычисляем
+        mov eax, a
+        cdq
+        idiv b
+        mov ebx, eax;
+
+        mov eax, c
+            imul eax, d; eax = c * d
+            sub ebx, eax;
+
+        add ebx, e;
+
+        mov y, ebx
+
+            push y
+            push offset fout
+            call printf
+            add esp, 8
+
+            pop ecx
+            pop edx
+            pop ebx
+    }
+    _getch();
+    return 0;
+}
+https://github.com/danyaqaz/Finalwork.git
